@@ -1,19 +1,16 @@
 // import React from 'react';
-// import Header from '../Header';
-// import NewsTicker from '../NewsTicker';
-// import Navbar from '../Navber';
-// import WisdomWords from './WisdomWords';
+import UpcomingEvents from './event/UpcomingEvents';
+import Teachers from './Teachers';
+import WisdomWords from './WisdomWords';
 
-// const Home = () => {
-//   return (
-//     <>
-//        <Header />
-//         <NewsTicker />
-//         <Navbar />
+const Home = () => {
+  return (
+    <div>
+      <UpcomingEvents />
+      <Teachers />
+      <WisdomWords />
+    </div>
+  );
+};
 
-//         <WisdomWords />
-//     </>
-//   );
-// };
-
-// export default Home;
+export default Home;

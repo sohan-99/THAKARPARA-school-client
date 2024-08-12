@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+// import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom';
 import Header from './components/Header';
 import Navbar from './components/Navber';
 import NewsTicker from './components/NewsTicker';
@@ -9,7 +9,6 @@ import WisdomWords from './components/home/WisdomWords';
 import Result from './components/pages/Result';
 
 function MainApp() {
-  const location = useLocation();
 
   return (
     <div>
@@ -25,7 +24,8 @@ function MainApp() {
         {/* <Route path="/contact" element={<Contact />} /> */}
         {/* <Route path="/login" element={<Login />} /> */}
       </Routes>
-      {location.pathname !== '/result' && <WisdomWords />}
+      <Outlet />
+      <WisdomWords />
     </div>
   );
 }

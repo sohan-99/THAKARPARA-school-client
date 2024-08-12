@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
@@ -33,8 +33,10 @@ const Navbar = () => {
         <li><Link to="/about" className="block px-4 py-2">About</Link></li>
         <li><Link to="/admission" className="block px-4 py-2">Admission</Link></li>
         <li><Link to="/result" className="block px-4 py-2">Result</Link></li>
+        <li><Link to="/teachers" className="block px-4 py-2">Teachers</Link></li>
         <li><Link to="/contact" className="block px-4 py-2">Contact</Link></li>
-        <li><Link to="/login" className="block px-4 py-2 text-red-500">Login</Link></li>
+
+        <li><Link to="/login" className="block px-4 py-2 text-gray-900">Login</Link></li>
 
       </ul>
     </nav>

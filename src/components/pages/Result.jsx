@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 const Result = () => {
   return (
@@ -14,7 +14,7 @@ const Result = () => {
             rel="noopener noreferrer"
             className="flex-1"
           >
-            <div className="bg-blue-600 text-white text-center my-4 p-6 text-xl font-bold">
+            <div className="bg-blue-600 text-white text-center my-4 p-6 text-lg font-bold">
               Board Result
             </div>
           </a>
@@ -24,16 +24,19 @@ const Result = () => {
             rel="noopener noreferrer"
             className="flex-1"
           >
-            <div className="bg-blue-600 text-white text-center my-4 p-6 text-xl font-bold">
+            <div className="bg-blue-600 text-white text-center my-4 p-6 text-lg font-bold">
               Institution Result
             </div>
           </a>
         </div>
       </div>
-      <div className="bg-blue-600 text-white text-center my-4 p-4 text-xl font-bold">
-        Class Result
-      </div>
-      
+      <a href="/class-result">
+        <div className="bg-blue-600 text-white text-center my-4 p-4 text-lg font-bold">
+          Class Result
+        </div>
+      </a>
+
+
     </div>
   );
 };
