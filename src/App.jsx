@@ -1,27 +1,39 @@
-// App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Navbar from './components/Navber';
 import NewsTicker from './components/NewsTicker';
-import HeroSection from './components/home/HeroSection';
 import UpcomingEvents from './components/UpcomingEvents';
 import EventDetail from './components/EventDetail';
 import WisdomWords from './components/home/WisdomWords';
+import Result from './components/pages/Result';
+
+function MainApp() {
+  const location = useLocation();
+
+  return (
+    <div>
+      <Header />
+      <NewsTicker />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<UpcomingEvents />} />
+        <Route path="/event/:id" element={<EventDetail />} />
+        <Route path="/result" element={<Result />} />
+        {/* <Route path="/about" element={<About />} /> */}
+        {/* <Route path="/admission" element={<Admission />} /> */}
+        {/* <Route path="/contact" element={<Contact />} /> */}
+        {/* <Route path="/login" element={<Login />} /> */}
+      </Routes>
+      {location.pathname !== '/result' && <WisdomWords />}
+    </div>
+  );
+}
 
 function App() {
   return (
     <Router>
-      <div>
-        <Header />
-        <NewsTicker />
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<UpcomingEvents />} />
-          <Route path="/event/:id" element={<EventDetail />} />
-        </Routes>
-        <WisdomWords />
-      </div>
+      <MainApp />
     </Router>
   );
 }

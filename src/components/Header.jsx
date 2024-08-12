@@ -6,8 +6,13 @@ const Header = () => {
       <div className="flex flex-col md:flex-row items-center mb-4 md:mb-0">
         <img src="https://i.ibb.co/kcyFQqh/download.png" alt="School Logo" className="h-14 md:h-18 w-14 md:w-18 rounded-lg" />
         <div className="text-center md:text-left md:ml-4 lg:ml-16">
-          <h1 className="text-lg md:text-2xl font-bold text-green-800">THAKARPARA HIGH SCHOOL</h1>
+          <a href="/" className="block">
+            <h1 className="text-lg md:text-2xl font-bold text-green-800">
+              THAKARPARA HIGH SCHOOL
+            </h1>
           <p className="text-sm md:text-base">School Code: 126088, EIIN: 126088</p>
+          </a>
+
         </div>
       </div>
       <div>
