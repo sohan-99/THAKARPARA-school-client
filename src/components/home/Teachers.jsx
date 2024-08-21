@@ -1,9 +1,12 @@
 // import React from 'react';
 
+import TeachersCarousel from "../pages/TeachersCarousel";
+
 const Teachers = () => {
   return (
     <div>
-      Teachers
+      <div className="text-3xl font-semibold mx-auto text-center m-6 ">Teachers List</div>
+      <TeachersCarousel />
     </div>
   );
 };
