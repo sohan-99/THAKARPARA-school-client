@@ -55,7 +55,7 @@ export default function Footer() {
             Rights Reserved.
           </Typography>
           <div className="flex gap-4 text-blue-gray-900">
-            <Typography as="a" href="https://www.facebook.com/school" className="opacity-80 transition-opacity hover:opacity-100">
+            <Typography as="a" href="https://www.facebook.com/Thekorparahighschool" className="opacity-80 transition-opacity hover:opacity-100">
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fillRule="evenodd"

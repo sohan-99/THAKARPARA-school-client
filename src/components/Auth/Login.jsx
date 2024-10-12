@@ -1,141 +1,108 @@
-// import { Link, useLocation, useNavigate } from "react-router-dom";
-// import { useContext } from "react";
-// import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-// import app from "../../firebase/firebase.config";
-// import { AuthContext } from "../../Provider/AuthProvider";
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-
-import { Link } from "react-router-dom";
-
+/* eslint-disable no-unused-vars */
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Provider/Authprovider";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
+    const { signInUser, signInWithGoogle } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
-    // const { signIn } = useContext(AuthContext);
-    // const navigate = useNavigate();
-    // const location = useLocation();
-    // const from = location.state?.from?.pathname || "/";
-    // const handleGooglePopUp = () => {
-    //     const auth = getAuth(app);
-    //     const provider = new GoogleAuthProvider();
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
 
-    //     signInWithPopup(auth, provider)
-    //         .then(result => {
-    //             console.log(result.user);
-    //             const user = result.user;
-    //             socialsignin(user?.displayName, user?.email, user?.photoURL);
-    //             toast.success('Successfully Login!');
-    //             // You can navigate the user here after successful login if needed.
-    //             navigate(location?.state ? location.state : '/')
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //             toast.error(error.message);
-    //         });
-    // };
+        signInUser(email, password)
+            .then((result) => {
+                toast.success("Login successfully!");
+                e.target.reset();
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
+            })
+            .catch((error) => {
+                toast.error("Login failed: " + error.message);
+            });
+    };
 
-    // const handleLogin = e => {
-    //     e.preventDefault();
-    //     const form = new FormData(e.currentTarget);
-    //     const email = form.get('email');
-    //     const password = form.get('password');
-    //     // console.log(email,password);
-    //     signIn(email, password)
-    //         .then(result => {
-    //             console.log(result.user);
-    //             toast.success('Successfully Login!')
-    //             navigate(from, { replace: true });
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //             toast.error(error.message);
-    //         })
-
-    // }
-    // //  data send to database in popup signin
-    // const socialsignin = (name, email, image) => {
-    //     const user = {
-    //         name: name,
-    //         email: email,
-    //         image: image,
-    //         designation: "Employee",
-    //         salary: '10000',
-    //         bank_account_no: "45967",
-    //     };
-    //     fetch("https://employee-management-server-two.vercel.app/users", {
-    //         method: "POST",
-    //         headers: {
-    //             "content-type": "application/json",
-    //         },
-    //         body: JSON.stringify(user),
-    //     })
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             console.log(data);
-    //         })
-    //         .catch((error) => console.error(error));
-    // };
-
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then((result) => {
+                toast.success("Login with Google successful!");
+                navigate('/');
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            });
+    };
 
     return (
-        <div>
-            <div className="my-6">
-                <div className="mt-14 mb-9 flex flex-col items-center justify-center">
-                    <div className="bg-gray-300  lg:max-w-lg w-[80%] md:w-[85%] lg:w-[85%] p-8 rounded-lg shadow-lg">
-                        <h2 className="lg:text-4xl md:text-2xl font-extrabold text-center text-gray-600">Welcome Back</h2>
-                        <h1 className="lg:text-4xl md:text-2xl font-extrabold text-center text-black mb-6">
-                            Signin to Your Account
-                        </h1>
-                        <form
-                            // onSubmit={handleLogin}
-                            className="space-y-4 ">
-                            <div>
-                                <label className="block text-black lg:text-lg md:text-base  font-medium">Email</label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    placeholder="Email"
-                                    className="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-black lg:text-lg md:text-base font-medium">Password</label>
-
-                                <input
-                                    type="password"
-                                    name="password"
-                                    placeholder="Password"
-                                    className="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400"
-                                    required
-                                />
-                                <Link className="text-blue-600 block mt-2 text-base font-medium">
-                                    Forgot password?
-                                </Link>
-                            </div>
-
-                            <div className="">
-                                <button className="bg-slate-500 hover:bg-slate-700 lg:text-xl font-semibold text-white py-3 px-6 rounded-full transition duration-300 ">
-                                    Signin
-                                </button>
-                            </div>
-                        </form>
-                        <button
-                            // onClick={handleGooglePopUp}
-                            className="bg-slate-500 hover:bg-slate-600 mt-6 lg:text-xl font-semibold text-white py-3 px-6 rounded-full transition duration-300 ">
-                            Google Signin
-                        </button>
-                        <p className="text-center mt-4 text-black text-base font-medium">
-                            Dont have an account?{" "}
-                            <Link className="text-blue-600 font-semibold text-lg" to="/signin">
-                                SignUp here
-                            </Link>
-                        </p>
-                    </div>
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+            <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
+                <div className="text-center mb-6">
+                    <h1 className="text-3xl font-bold text-gray-700">Login now!</h1>
                 </div>
-
+                <form onSubmit={handleLogin}>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                        />
+                    </div>
+                    <div className="mb-4 relative">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Password
+                        </label>
+                        <input
+                            type={showPassword ? "text" : "password"} // Toggle input type
+                            name="password"
+                            placeholder="Password"
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                        />
+                        <button
+                            type="button"
+                            className="absolute right-3 top-9 text-gray-500"
+                            onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+                        >
+                            {showPassword ? "Hide" : "Show"}
+                        </button>
+                    </div>
+                    <div className="mb-4">
+                        <button
+                            type="submit"
+                            className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+                        >
+                            Login
+                        </button>
+                    </div>
+                </form>
+                <p className="text-center text-gray-600">
+                    New to Thakarpara high school |{" "}
+                    <Link to="/register" className="text-blue-500 hover:underline">
+                        Register
+                    </Link>
+                </p>
+                <div className="text-center mt-4">
+                    <button
+                        onClick={handleGoogleSignIn}
+                        className="w-full py-2 px-4 border border-gray-300 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white focus:outline-none focus:ring focus:border-blue-300"
+                    >
+                        Sign in with Google
+                    </button>
+                </div>
             </div>
-            {/* <ToastContainer /> */}
+
+            <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} />
         </div>
     );
 };
